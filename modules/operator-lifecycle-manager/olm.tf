@@ -153,6 +153,7 @@ resource "kubernetes_manifest" "deployment_olm_operator" {
               "ports" = [
                 {
                   "containerPort" = 8080
+                  "protocol" = "TCP"
                 },
                 {
                   "containerPort" = 8081
@@ -239,6 +240,7 @@ resource "kubernetes_manifest" "deployment_catalog_operator" {
               "ports" = [
                 {
                   "containerPort" = 8080
+                  "protocol" = "TCP"
                 },
                 {
                   "containerPort" = 8081
