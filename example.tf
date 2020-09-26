@@ -17,5 +17,5 @@ provider "kubernetes-alpha" {
 }
 
 module "operator-lifecycle-manager" {
-  source        = "./modules/operator-lifecycle-manager"
+  source = "./modules/operator-lifecycle-manager"
 }
