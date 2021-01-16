@@ -7,7 +7,7 @@ terraform {
   }
 }
 
-resource "kubernetes_namespace" "namespace" {
+resource "kubernetes_namespace" "namespace_operators" {
   metadata {
     name = "operators"    
   }
@@ -15,5 +15,16 @@ resource "kubernetes_namespace" "namespace" {
 
 module "prometheus-operator" {
   source = "./modules/prometheus-operator"
-  namespace = "operators"
+  namespace = kubernetes_namespace.namespace_operators.metadata[0].name
+}
+
+resource "kubernetes_namespace" "namespace_prometheus" {
+  metadata {
+    name = "prometheus"    
+  }
+}
+
+module "prometheus" {
+  source = "./modules/prometheus"
+  namespace = kubernetes_namespace.namespace_prometheus.metadata[0].name
 }
