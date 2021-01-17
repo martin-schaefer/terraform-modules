@@ -65,6 +65,16 @@ resource "kubernetes_cluster_role_binding" "prometheus" {
   }
 }
 
+resource "kubernetes_secret" "secret" {
+  metadata {
+    name = "additional-scrape-config"
+    namespace = var.namespace
+  }
+  data = {
+    "additional-scrape-config.yaml" = file("${path.module}/additional-scrape-config.yaml")
+  }
+}
+
 resource "kubectl_manifest" "prometheus" {
     yaml_body = templatefile("${path.module}/prometheus.yaml", { namespace = var.namespace, service_account_name = kubernetes_service_account.service_account.metadata[0].name } )
 }

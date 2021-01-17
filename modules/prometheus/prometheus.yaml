@@ -8,6 +8,11 @@ spec:
   serviceMonitorSelector:
     matchLabels:
       team: frontend
+  scrapeInterval: 15s
+  evaluationInterval: 15s
+  additionalScrapeConfigs:
+    name: additional-scrape-config
+    key: additional-scrape-config.yaml
   resources:
     requests:
       memory: 400Mi
